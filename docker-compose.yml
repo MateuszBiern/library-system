@@ -35,7 +35,7 @@ services:
     volumes:
       - ./library/backend/bibliotekaPHP/:/var/www/html/api/
       - ./library/backend/bibliotekaPHP/book_covers:/var/www/html/book_covers
-      - ./library/frontend/biblioteka/dist:/var/www/html
+    
     links:
       - mysql:mysql
 
