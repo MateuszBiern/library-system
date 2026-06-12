@@ -1,0 +1,81 @@
+.recent-books-container {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	padding: 15px;
+	align-items: center;
+	width: 90%;
+	max-width: 600px;
+	margin: 20px auto;
+	background: #1b1d23;
+	border-radius: 10px;
+	color: #ecf0f1;
+}
+
+.recent-book-item {
+	display: flex;
+	flex-direction: column;
+	background-color: #1b1d23;
+	border-radius: 10px;
+	padding: 15px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+	width: 100%;
+}
+
+.recent-book-title {
+	font-size: 1.2rem;
+	font-weight: 600;
+	text-align: left;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #2c3e50;
+	padding-bottom: 8px;
+	width: 100%;
+}
+
+.recent-book-main {
+	display: flex;
+	gap: 15px;
+	align-items: flex-start;
+}
+
+.recent-book-link {
+	text-decoration: none;
+	color: inherit;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 120px; /* mniejsza okładka */
+	min-height: 180px;
+}
+
+.recent-book-cover {
+	width: 100%;
+	height: 180px; /* mniejsza wysokość */
+	background-color: #eee;
+	border-radius: 6px;
+	background-size: cover;
+	background-position: center;
+	margin-bottom: 8px;
+}
+
+.recent-book-chapters {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	justify-content: flex-start;
+}
+
+.recent-book-chapter-link {
+	font-size: 0.85rem; /* mniejszy tekst */
+	color: #bdc3c7;
+	text-decoration: none;
+}
+
+.recent-book-chapter-link:hover {
+	color: #3498db;
+}
+
+.recent-book-no-chapters {
+	font-size: 0.8rem; /* mniejszy tekst dla informacji */
+	color: #999;
+}
