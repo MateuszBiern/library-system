@@ -8,14 +8,20 @@ Aplikacja do zarządzania biblioteką zbudowana na React + PHP + MySQL + Nginx w
 
 ## Uruchomienie
 
-1. Sklonuj repozytorium:
-   git clone [https://github.com/MateuszBiern/library-system.git](https://github.com/MateuszBiern/library-system.git)
+bash
+# 1. Pobranie z Gituba
+git clone [https://github.com/MateuszBiern/library-system.git](https://github.com/MateuszBiern/library-system.git)
 
-2. Wejdź do folderu:
-   cd library-system
+# 2. Wejście do folderu
+cd library-system
 
-3. Uruchom aplikację:
-   docker compose up --build
+# 3. Zabezpieczenie końcówek linii
+git config core.autocrlf false
+git rm --cached -r .
+git reset --hard
+
+# 4. Odpalenie całości
+docker compose up --build
 
 4. Otwórz przeglądarkę i wejdź na:
    http://localhost
