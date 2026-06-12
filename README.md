@@ -9,7 +9,7 @@ Aplikacja do zarządzania biblioteką zbudowana na React + PHP + MySQL + Nginx w
 ## Uruchomienie
 
 1. Sklonuj repozytorium:
-   git clone https://github.com/MateuszBiern/library-system.git
+   git clone [https://github.com/MateuszBiern/library-system.git](https://github.com/MateuszBiern/library-system.git)
 
 2. Wejdź do folderu:
    cd library-system
