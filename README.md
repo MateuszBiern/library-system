@@ -30,7 +30,7 @@ docker compose up --build
 ```
 ## Uwagi
 
-- ADMIN LOGIN : 1@op.pl 123, USER LOGIN: 2@op.pl 123
+- ADMIN LOGIN : 1@op.pl 123, USER LOGIN: 2@op.pl 123(2-9 @op.pl)
 - Pierwsze uruchomienie może potrwać kilka minut (pobieranie obrazów + budowanie frontendu)
 - Baza danych jest automatycznie inicjalizowana z pliku library.sql
 - Aplikacja działa na porcie 80
