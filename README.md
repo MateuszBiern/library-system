@@ -1,5 +1,11 @@
 # Library System 📚
 
+🌐 **Demo online:** [librarymb.gt.tc](https://librarymb.gt.tc)
+
+### Dane do logowania (demo)
+**Admin:** 1@op.pl / 123
+**Użytkownicy:** 2@op.pl do 9@op.pl / hasło: 123
+
 Fullstack aplikacja webowa do zarządzania i czytania książek online, zintegrowana z automatycznym tłumaczem rozdziałów z języka angielskiego na polski.
 
 ## Opis projektu
