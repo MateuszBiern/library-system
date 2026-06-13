@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# Wait for database to be ready
 echo "Waiting for MySQL to be ready..."
 i=0
 while [ $i -lt 30 ]; do
@@ -12,19 +13,10 @@ while [ $i -lt 30 ]; do
     sleep 1
 done
 
-echo "Checking if database needs initialization..."
-TABLE_EXISTS=$(mysql -h "$DB_HOST" --ssl-mode=DISABLED -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" -e "SHOW TABLES LIKE 'books';" 2>/dev/null | grep books)
-
-if [ -z "$TABLE_EXISTS" ]; then
-    echo "Initializing database..."
-    mysql -h "$DB_HOST" --ssl-mode=DISABLED -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" < /var/www/html/library.sql
-    echo "Database initialized!"
-else
-    echo "Database already initialized, skipping."
-fi
-
+# Start PHP-FPM in background
 echo "Starting PHP-FPM..."
 php-fpm -D
 
+# Start Nginx in foreground
 echo "Starting Nginx..."
 exec nginx -g 'daemon off;'
