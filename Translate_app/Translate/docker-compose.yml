@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  translator:
+    build: .
+    container_name: reader_translator
+    ports:
+      - '5000:5000'
+    volumes:
+      # Mapujemy folder exports kontenera na Twój dysk komputera
+      - ./backend/exports:/app/backend/exports
+    environment:
+      - PORT=5000
