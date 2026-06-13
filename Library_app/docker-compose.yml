@@ -10,9 +10,8 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - ./backend/bibliotekaPHP/:/var/www/html/api/
-      - ./backend/bibliotekaPHP/book_covers:/var/www/html/book_covers
-      - ./backend/bibliotekaPHP/mojprojekt:/var/www/html/api/mojprojekt
+      - ./library.sql:/docker-entrypoint-initdb.d/library.sql
+      - mysql_data:/var/lib/mysql
     healthcheck:
       test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
       timeout: 20s
@@ -35,6 +34,7 @@ services:
     volumes:
       - ./backend/bibliotekaPHP/:/var/www/html/api/
       - ./backend/bibliotekaPHP/book_covers:/var/www/html/book_covers
+      - ./backend/bibliotekaPHP/mojprojekt:/var/www/html/api/mojprojekt
     links:
       - mysql:mysql
 volumes:
