@@ -1,51 +1,131 @@
-# Library System
-LINK: https://librarymb.gt.tc
-Aplikacja do zarządzania biblioteką zbudowana na React + PHP + MySQL + Nginx w Dockerze.
+# Library System 📚
 
-## Wymagania
+Fullstack aplikacja webowa do zarządzania i czytania książek online, zintegrowana z automatycznym tłumaczem rozdziałów z języka angielskiego na polski.
 
-- Docker Desktop (https://www.docker.com/products/docker-desktop/)
+## Opis projektu
 
-## Uruchomienie
+Library System to kompleksowa platforma do czytania książek webowych (tzw. light novels), składająca się z dwóch niezależnych aplikacji działających w środowisku Docker:
 
-```bash
-# Library System
+- **Biblioteka** - główna aplikacja webowa umożliwiająca przeglądanie, czytanie i ocenianie książek
+- **Tłumacz** - autonomiczne narzędzie do automatycznego pobierania i tłumaczenia rozdziałów z serwisu fanmtl.com
 
-## Wymagania
+## Technologie
+
+### Frontend (Biblioteka)
+- **React 18** + **TypeScript** - budowa interfejsu użytkownika
+- **Vite** - bundler i środowisko deweloperskie
+- **React Router** - routing po stronie klienta (SPA)
+- **CSS Modules** - stylowanie komponentów
+
+### Backend (Biblioteka)
+- **PHP 8.2** + **PHP-FPM** - logika serwerowa i API REST
+- **MySQL 8.0** - relacyjna baza danych
+- **PDO / MySQLi** - komunikacja z bazą danych
+- **Nginx** - serwer HTTP, reverse proxy dla PHP-FPM
+
+### Tłumacz
+- **Node.js** + **Express** - serwer HTTP i API
+- **Puppeteer** - headless browser do web scrapingu rozdziałów
+- **Google Translate API** - automatyczne tłumaczenie tekstu EN→PL
+- **React** + **Vite** - panel sterowania tłumaczem
+
+### DevOps
+- **Docker** + **Docker Compose** - konteneryzacja całego środowiska
+- **Multi-stage build** - optymalizacja obrazów Docker (budowanie frontendu w osobnym stage)
+- **Nginx** - serwowanie plików statycznych i proxy do PHP-FPM
+
+## Architektura
+library-system/
+
+├── Library_app/              # Główna aplikacja biblioteki
+
+│   ├── frontend/biblioteka/  # React + TypeScript (SPA)
+
+│   ├── backend/bibliotekaPHP/# PHP REST API
+
+│   ├── library.sql           # Schema i dane bazy MySQL
+
+│   ├── Dockerfile            # Multi-stage build
+
+│   ├── docker-compose.yml    # Orchestracja kontenerów
+
+│   └── nginx.conf            # Konfiguracja serwera
+
+│
+
+└── Translate_app/Translate/  # Aplikacja tłumacza
+
+├── frontend/tlumacz/     # React panel sterowania
+
+├── backend/              # Node.js + Express + Puppeteer
+
+└── Dockerfile            # Build frontendu + backend
+
+## Funkcjonalności
+
+### Biblioteka
+- Przeglądanie listy książek z okładkami, opisami i tagami
+- System oceniania książek (1-5 gwiazdek)
+- Czytanie rozdziałów z nawigacją (poprzedni/następny)
+- Wyszukiwanie książek
+- Ranking najlepiej ocenianych książek
+- Rekomendacje na podstawie ocen
+- Rejestracja i logowanie użytkowników
+- Panel admina do zarządzania książkami (dodawanie, usuwanie, edycja tytułu, opisu, okładki)
+- Import rozdziałów z plików JSON
+
+### Tłumacz
+- Web scraping rozdziałów z fanmtl.com przy użyciu Puppeteer
+- Automatyczne tłumaczenie EN→PL przez Google Translate
+- Obsługa zakresów rozdziałów (np. rozdział 1-50)
+- Retry mechanism przy błędach pobierania
+- Eksport przetłumaczonych rozdziałów do formatu JSON
+- Panel logów w czasie rzeczywistym
+
+## Jak to działa?
+
+1. Tłumacz pobiera treść rozdziałów ze strony fanmtl.com używając headless Chromium (Puppeteer)
+2. Tekst jest dzielony na fragmenty i tłumaczony przez Google Translate API
+3. Przetłumaczone rozdziały są zapisywane jako plik JSON w folderze `exports/`
+4. Plik JSON jest kopiowany do folderu `mojprojekt/` w bibliotece
+5. Endpoint `import_json.php` importuje rozdziały do bazy MySQL
+6. Rozdziały są dostępne do czytania w aplikacji biblioteki
+
+## Instalacja i uruchomienie
+
+### Wymagania
 - Docker Desktop (https://www.docker.com/products/docker-desktop/)
 - Git
 
-## Instalacja
-
-1. Sklonuj repozytorium:
+### 1. Sklonuj repozytorium
 git clone https://github.com/MateuszBiern/library-system.git
 
-2. Uruchom bibliotekę:
+### 2. Uruchom bibliotekę
 cd library-system/Library_app
+
 docker compose up --build
+Biblioteka dostępna pod: **http://localhost**
 
-Biblioteka dostępna pod: http://localhost
-
-3. Uruchom tłumacz (w nowym oknie terminala):
+### 3. Uruchom tłumacz (nowe okno terminala)
 cd library-system/Translate_app/Translate
+
 docker compose up --build
+Tłumacz dostępny pod: **http://localhost:5000**
 
-Tłumacz dostępny pod: http://localhost:5000
+## Jak dodać nową książkę?
 
-## Jak używać tłumacza
+1. Zaloguj się do biblioteki i dodaj książkę przez panel admina
+2. Zapamiętaj ID książki
+3. Wejdź na http://localhost:5000
+4. Podaj:
+   - **Book ID** - ID książki z biblioteki
+   - **Base URL** - link do książki np. `https://www.fanmtl.com/novel/ke423463_1.html`
+   - **From/To chapter** - zakres rozdziałów do pobrania
+5. Kliknij **Start** i poczekaj na zakończenie
+6. Skopiuj wygenerowany plik JSON z `exports/` do `Library_app/backend/bibliotekaPHP/mojprojekt/`
+7. Wejdź na `http://localhost/api/import_json` aby zaimportować rozdziały
 
-1. Wejdź na http://localhost:5000
-2. Podaj Book ID (musi istnieć w bibliotece)
-3. W polu Base URL wklej link do książki np:
-   https://www.fanmtl.com/novel/ke423463_1.html
-4. Podaj zakres rozdziałów (From/To)
-5. Kliknij Start
-6. Po zakończeniu skopiuj plik JSON z exports/ do Library_app/backend/bibliotekaPHP/mojprojekt/
-7. Wejdź na http://localhost/api/import_json aby zaimportować rozdziały do biblioteki
-```
 ## Uwagi
-
-- ADMIN LOGIN : 1@op.pl 123, USER LOGIN: 2@op.pl 123(2-9 @op.pl)
-- Pierwsze uruchomienie może potrwać kilka minut (pobieranie obrazów + budowanie frontendu)
-- Baza danych jest automatycznie inicjalizowana z pliku library.sql
-- Aplikacja działa na porcie 80
+- Pierwsze uruchomienie może potrwać kilka minut (pobieranie obrazów Docker + budowanie frontendu)
+- Baza danych jest automatycznie inicjalizowana przy pierwszym uruchomieniu
+- Tłumaczenie dużej liczby rozdziałów może potrwać długo ze względu na limity Google Translate
