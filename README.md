@@ -9,24 +9,39 @@ Aplikacja do zarządzania biblioteką zbudowana na React + PHP + MySQL + Nginx w
 ## Uruchomienie
 
 ```bash
-# 1. Pobranie z Gituba
+# Library System
+
+## Wymagania
+- Docker Desktop (https://www.docker.com/products/docker-desktop/)
+- Git
+
+## Instalacja
+
+1. Sklonuj repozytorium:
 git clone https://github.com/MateuszBiern/library-system.git
 
-# 2. Wejście do folderu
-cd library-system
-
-# 3. Zabezpieczenie końcówek linii
-git config core.autocrlf false
-
-git rm --cached -r .
-
-git reset --hard
-
-# 4. Odpalenie całości
+2. Uruchom bibliotekę:
+cd library-system/Library_app
 docker compose up --build
 
-4. Otwórz przeglądarkę i wejdź na:
-   http://localhost
+Biblioteka dostępna pod: http://localhost
+
+3. Uruchom tłumacz (w nowym oknie terminala):
+cd library-system/Translate_app/Translate
+docker compose up --build
+
+Tłumacz dostępny pod: http://localhost:5000
+
+## Jak używać tłumacza
+
+1. Wejdź na http://localhost:5000
+2. Podaj Book ID (musi istnieć w bibliotece)
+3. W polu Base URL wklej link do książki np:
+   https://www.fanmtl.com/novel/ke423463_1.html
+4. Podaj zakres rozdziałów (From/To)
+5. Kliknij Start
+6. Po zakończeniu skopiuj plik JSON z exports/ do Library_app/backend/bibliotekaPHP/mojprojekt/
+7. Wejdź na http://localhost/api/import_json aby zaimportować rozdziały do biblioteki
 ```
 ## Uwagi
 
