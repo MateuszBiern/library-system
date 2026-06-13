@@ -3,11 +3,11 @@ FROM node:20-alpine AS frontend-builder
 
 WORKDIR /app/frontend
 
-COPY library/frontend/biblioteka/package.json library/frontend/biblioteka/package-lock.json* ./
+COPY frontend/biblioteka/package.json frontend/biblioteka/package-lock.json* ./
 
 RUN npm install
 
-COPY library/frontend/biblioteka/ ./
+COPY frontend/biblioteka/ ./
 
 RUN npm run build
 
@@ -25,7 +25,7 @@ RUN mkdir -p /var/www/html /var/run/nginx /var/log/nginx
 WORKDIR /var/www/html
 
 # Copy backend PHP files
-COPY library/backend/bibliotekaPHP/ ./api/
+COPY backend/bibliotekaPHP/ ./api/
 
 # Copy built frontend from builder stage
 COPY --from=frontend-builder /app/frontend/dist ./

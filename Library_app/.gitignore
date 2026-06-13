@@ -17,4 +17,4 @@ mysql_data/
 Thumbs.db
 
 # Logi
-*.logdist/
+*.log
