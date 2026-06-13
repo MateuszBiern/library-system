@@ -1,0 +1,20 @@
+# Node
+node_modules/
+library/frontend/biblioteka/node_modules/
+
+# Build output (budowane przez Docker)
+library/frontend/biblioteka/dist/
+
+# MySQL data
+mysql_data/
+
+# Środowisko
+.env
+.env.local
+
+# System
+.DS_Store
+Thumbs.db
+
+# Logi
+*.logdist/
