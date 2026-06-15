@@ -1,4 +1,4 @@
-🇬🇧 English version: [README.md](README.md)
+🇬🇧 Main version: [README.md](README.md)
 # Library System 
 
  **Demo online:** [librarymb.gt.tc](https://librarymb.gt.tc)
