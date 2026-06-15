@@ -145,23 +145,20 @@ Tłumacz dostępny pod: **http://localhost:5000**
 ### Search
 ![search](docs/search.png)
 
----
-
 ### Book page
 ![book page](docs/book_page.png)
 
 ### Book chapter reader
 ![book chapter](docs/book_chapter.png)
 
+### Chapter Pagination
+![book pagination](docs/pagination.png)
+
 ### Book pagination
 ![book pagination](docs/book_pagination.png)
 
----
-
 ### Login
 ![login](docs/login.png)
-
----
 
 ### Add book (admin)
 ![add book](docs/add_book.png)
@@ -171,6 +168,7 @@ Tłumacz dostępny pod: **http://localhost:5000**
 
 ### Edit book details
 ![edit book details](docs/edit_book_details.png)
+
 - Pierwsze uruchomienie może potrwać kilka minut (pobieranie obrazów Docker + budowanie frontendu)
 - Baza danych jest automatycznie inicjalizowana przy pierwszym uruchomieniu
 - Tłumaczenie dużej liczby rozdziałów może potrwać długo ze względu na limity Google Translate
