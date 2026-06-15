@@ -107,7 +107,7 @@ library-system/
 
 ### 1. Klonowanie repozytorium
 ```bash
-git clone [https://github.com/MateuszBiern/library-system.git](https://github.com/MateuszBiern/library-system.git)
+git clone https://github.com/MateuszBiern/library-system.git
 ```
 
 ### 2. Uruchomienie Biblioteki
