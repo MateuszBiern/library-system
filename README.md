@@ -171,20 +171,6 @@ Tłumacz dostępny pod: **http://localhost:5000**
 
 ### Edit book details
 ![edit book details](docs/edit_book_details.png)
-
----
-
-### Translator (Web panel)
-![translator web](docs/translator_web.png)
-
-### Translator (Terminal / CLI)
-![translator terminal](docs/translator_terminal.png)
-
----
-
-### Mobile view
-![mobile](docs/mobile.png)
-## Uwagi
 - Pierwsze uruchomienie może potrwać kilka minut (pobieranie obrazów Docker + budowanie frontendu)
 - Baza danych jest automatycznie inicjalizowana przy pierwszym uruchomieniu
 - Tłumaczenie dużej liczby rozdziałów może potrwać długo ze względu na limity Google Translate
