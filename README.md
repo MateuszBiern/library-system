@@ -99,8 +99,6 @@ library-system/
 
 ---
 
-## Installation & Setup
-
 ## Installation and Setup
 
 ### Prerequisites
@@ -119,7 +117,7 @@ git clone https://github.com/MateuszBiern/library-system.git
 cd library-system/Library_app
 docker compose up --build
 ```
-*Library will be available at:**[http://localhost](http://localhost)**
+*Library will be available at: **[http://localhost](http://localhost)**
 
 ### 3. Run Translator
 Open **a new terminal** and run:
@@ -130,8 +128,6 @@ docker compose up --build
 *Translator will be available at:**[http://localhost:5000](http://localhost:5000)**
 
 ---
-
-##  Procedura inicjalizacji nowej książki i importu rozdziałów
 
 ## Book Initialization & Chapter Import Workflow
 
