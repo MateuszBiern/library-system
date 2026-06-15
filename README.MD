@@ -100,10 +100,83 @@ library-system/
 
 ## Installation & Setup
 
-### Requirements
-- Docker Desktop
-- Git
+## Installation and Setup
 
-### 1. Clone repository
+### Prerequisites
+- Installed Docker Desktop
+- Installed Git
+
+---
+
+### 1. Clone the repository
 ```bash
 git clone https://github.com/MateuszBiern/library-system.git
+```
+
+### 2. Run Library
+```bash
+cd library-system/Library_app
+docker compose up --build
+```
+*Library will be available at:**[http://localhost](http://localhost)**
+
+### 3. Run Translator
+Open **a new terminal** and run:
+```bash
+cd library-system/Translate_app/Translate
+docker compose up --build
+```
+*Translator will be available at:**[http://localhost:5000](http://localhost:5000)**
+
+---
+
+##  Procedura inicjalizacji nowej książki i importu rozdziałów
+
+## Book Initialization & Chapter Import Workflow
+
+The process of adding a new book requires synchronization between the main application and the translation module. Below is a step-by-step guide:
+
+1. **Database record initialization:** Log in to the main application as an administrator and create a new book via the Admin Panel.
+
+2. **Resource identification:** Copy the generated **Book ID**. It will serve as the linking key for imported chapters.
+
+3. **Scraping task configuration:** Open the Translator interface (`http://localhost:5000`) and define the following parameters:
+   - **Book ID:** Target ID of the previously created book  
+   - **Base URL:** Direct URL to the first chapter in the source website (e.g. `https://www.fanmtl.com/novel/ke423463_1.html`)  
+   - **From/To chapter:** Chapter range for the scraping process (e.g. 1–50)
+4. **Run the process:** Start the task using the **Start** button. Execution time depends on the selected range and Google Translate API limits.
+5. **Transfer artifacts:** After translation is completed, copy the generated `.json` file from the Translator workspace (`exports/`) to: Library_app/backend/bibliotekaPHP/mojprojekt/
+6. **Database seeding:** Call the synchronization endpoint by visiting: http://localhost/api/import_json  The script will parse the JSON file and permanently store the translated chapters in the MySQL database.
+---
+
+##  Screenshots
+
+### Home Page
+![main](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/main.png)
+
+### Recommendations & Recently Added
+![recommendations](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/recommendation.png)
+![last added](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/last_added.png)
+
+### Search
+![search](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/search.png)
+
+### Book Page & Reader
+![book page](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/book_page.png)
+![book chapter](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/book_chapter.png)
+![book pagination](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/book_pagination.png)
+
+### Login Panel
+![login](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/login.png)
+
+### Admin Panel (Add & Edit)
+![add book](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/add_book.png)
+![edit books](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/edit_books.png)
+![edit book details](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/edit_book_details.png)---
+
+## Important Notes
+
+- The first startup may take a few minutes (downloading Docker images + building the frontend).
+- The database is automatically initialized on the first run.
+- Translating a large number of chapters at once may take a long time due to Google Translate API limits.
+
