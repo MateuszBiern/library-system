@@ -1,72 +1,69 @@
+Markdown
 # Library System 📚
 
 🌐 **Demo online:** [librarymb.gt.tc](https://librarymb.gt.tc)
 
-### Dane do logowania (demo)
-**Admin:** 1@op.pl / 123
-**Użytkownicy:** 2@op.pl do 9@op.pl / hasło: 123
+### 🔑 Dane do logowania (Wersja Demo)
+* **Administrator:** `1@op.pl` / hasło: `123`
+* **Użytkownicy:** od `2@op.pl` do `9@op.pl` / hasło: `123`
 
-Fullstack aplikacja webowa do zarządzania i czytania książek online, zintegrowana z automatycznym tłumaczem rozdziałów z języka angielskiego na polski.
+Aplikacja webowa typu Full-stack do zarządzania i czytania książek online, zintegrowana z autonomicznym modułem do automatycznego tłumaczenia rozdziałów z języka angielskiego na polski.
 
-## Opis projektu
+---
 
-Library System to kompleksowa platforma do czytania książek webowych (tzw. light novels), składająca się z dwóch niezależnych aplikacji działających w środowisku Docker:
+## 📝 Opis projektu
 
-- **Biblioteka** - główna aplikacja webowa umożliwiająca przeglądanie, czytanie i ocenianie książek
-- **Tłumacz** - autonomiczne narzędzie do automatycznego pobierania i tłumaczenia rozdziałów z serwisu fanmtl.com
+**Library System** to kompleksowa platforma do czytania książek webowych (tzw. *light novels*), składająca się z dwóch niezależnych aplikacji działających w środowisku Docker:
 
-## Technologie
+* 📖 **Biblioteka** – główna aplikacja webowa umożliwiająca przeglądanie, czytanie, wyszukiwanie oraz ocenianie książek.
+* 🤖 **Tłumacz** – autonomiczne narzędzie do automatycznego pobierania (web scrapingu) i tłumaczenia rozdziałów z serwisu fanmtl.com.
+
+---
+
+## 🛠️ Technologie
 
 ### Frontend (Biblioteka)
-- **React 18** + **TypeScript** - budowa interfejsu użytkownika
-- **Vite** - bundler i środowisko deweloperskie
-- **React Router** - routing po stronie klienta (SPA)
-- **CSS Modules** - stylowanie komponentów
+* **React 18** + **TypeScript** – budowa interfejsu użytkownika
+* **Vite** – szybki bundler i środowisko deweloperskie
+* **React Router** – routing po stronie klienta (SPA)
+* **CSS Modules** – izolowane stylowanie komponentów
 
 ### Backend (Biblioteka)
-- **PHP 8.2** + **PHP-FPM** - logika serwerowa i API REST
-- **MySQL 8.0** - relacyjna baza danych
-- **PDO / MySQLi** - komunikacja z bazą danych
-- **Nginx** - serwer HTTP, reverse proxy dla PHP-FPM
+* **PHP 8.2** + **PHP-FPM** – logika serwerowa i REST API
+* **MySQL 8.0** – relacyjna baza danych
+* **PDO / MySQLi** – bezpieczna komunikacja z bazą danych
+* **Nginx** – serwer HTTP oraz reverse proxy dla PHP-FPM
 
 ### Tłumacz
-- **Node.js** + **Express** - serwer HTTP i API
-- **Puppeteer** - headless browser do web scrapingu rozdziałów
-- **Google Translate API** - automatyczne tłumaczenie tekstu EN→PL
-- **React** + **Vite** - panel sterowania tłumaczem
+* **Node.js** + **Express** – serwer HTTP i API backendowe
+* **Puppeteer** – headless browser do zaawansowanego scrapingu treści
+* **Google Translate API** – automatyczne tłumaczenie tekstu (EN → PL)
+* **React** + **Vite** – intuicyjny panel sterowania procesem tłumaczenia
 
-### DevOps
-- **Docker** + **Docker Compose** - konteneryzacja całego środowiska
-- **Multi-stage build** - optymalizacja obrazów Docker (budowanie frontendu w osobnym stage)
-- **Nginx** - serwowanie plików statycznych i proxy do PHP-FPM
+### DevOps / Infrastruktura
+* **Docker** + **Docker Compose** – pełna konteneryzacja środowiska
+* **Multi-stage builds** – optymalizacja rozmiaru obrazów produkcyjnych
+* **Nginx** – serwowanie plików statycznych frontendu
 
-## Architektura
+---
+
+## 📐 Architektura projektu
+
+````text
 library-system/
-
 ├── Library_app/              # Główna aplikacja biblioteki
-
 │   ├── frontend/biblioteka/  # React + TypeScript (SPA)
-
 │   ├── backend/bibliotekaPHP/# PHP REST API
-
-│   ├── library.sql           # Schema i dane bazy MySQL
-
-│   ├── Dockerfile            # Multi-stage build
-
-│   ├── docker-compose.yml    # Orchestracja kontenerów
-
-│   └── nginx.conf            # Konfiguracja serwera
-
+│   ├── library.sql           # Schema i dane startowe bazy MySQL
+│   ├── Dockerfile            # Multi-stage build (Frontend + Backend)
+│   ├── docker-compose.yml    # Orkiestracja kontenerów bazy i serwera
+│   └── nginx.conf            # Konfiguracja serwera Nginx
 │
-
 └── Translate_app/Translate/  # Aplikacja tłumacza
-
-├── frontend/tlumacz/     # React panel sterowania
-
-├── backend/              # Node.js + Express + Puppeteer
-
-└── Dockerfile            # Build frontendu + backend
-
+    ├── frontend/tlumacz/     # Panel sterowania (React)
+    ├── backend/              # Node.js + Express + Puppeteer
+    └── Dockerfile            # Budowanie frontendu i środowiska Node
+````
 ## Funkcjonalności
 
 ### Biblioteka
