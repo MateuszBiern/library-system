@@ -46,7 +46,7 @@ Aplikacja webowa typu Full-stack do zarządzania i czytania książek online, zi
 
 ---
 
-## 📐 Architektura projektu
+##  Architektura projektu
 
 ```text
 library-system/
