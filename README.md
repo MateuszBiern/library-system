@@ -113,7 +113,7 @@ git clone https://github.com/MateuszBiern/library-system.git
 ### 2. Uruchomienie Biblioteki
 ```bash
 cd library-system/Library_app
-docker compose up --build -d
+docker compose up --build
 ```
 *Biblioteka będzie dostępna pod adresem:* **[http://localhost](http://localhost)**
 
@@ -121,7 +121,7 @@ docker compose up --build -d
 Otwórz **nowe okno terminala** i wykonaj:
 ```bash
 cd library-system/Translate_app/Translate
-docker compose up --build -d
+docker compose up --build
 ```
 *Tłumacz będzie dostępny pod adresem:* **[http://localhost:5000](http://localhost:5000)**
 
