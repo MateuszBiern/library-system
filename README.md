@@ -1,4 +1,3 @@
-Markdown
 # Library System 📚
 
 🌐 **Demo online:** [librarymb.gt.tc](https://librarymb.gt.tc)
@@ -49,7 +48,7 @@ Aplikacja webowa typu Full-stack do zarządzania i czytania książek online, zi
 
 ## 📐 Architektura projektu
 
-````text
+```text
 library-system/
 ├── Library_app/              # Główna aplikacja biblioteki
 │   ├── frontend/biblioteka/  # React + TypeScript (SPA)
@@ -63,110 +62,114 @@ library-system/
     ├── frontend/tlumacz/     # Panel sterowania (React)
     ├── backend/              # Node.js + Express + Puppeteer
     └── Dockerfile            # Budowanie frontendu i środowiska Node
-````
-## Funkcjonalności
+```
 
-### Biblioteka
-- Przeglądanie listy książek z okładkami, opisami i tagami
-- System oceniania książek (1-5 gwiazdek)
-- Czytanie rozdziałów z nawigacją (poprzedni/następny)
-- Wyszukiwanie książek
-- Ranking najlepiej ocenianych książek
-- Rekomendacje na podstawie ocen
-- Rejestracja i logowanie użytkowników
-- Panel admina do zarządzania książkami (dodawanie, usuwanie, edycja tytułu, opisu, okładki)
-- Import rozdziałów z plików JSON
+---
 
-### Tłumacz
-- Web scraping rozdziałów z fanmtl.com przy użyciu Puppeteer
-- Automatyczne tłumaczenie EN→PL przez Google Translate
-- Obsługa zakresów rozdziałów (np. rozdział 1-50)
-- Retry mechanism przy błędach pobierania
-- Eksport przetłumaczonych rozdziałów do formatu JSON
-- Panel logów w czasie rzeczywistym
+## 🌟 Funkcjonalności
 
-## Jak to działa?
+### 📖 Biblioteka
+* Przeglądanie katalogu książek wraz z okładkami, opisami i tagami.
+* System oceniania książek w skali 1-5 gwiazdek.
+* Czytnik rozdziałów z płynną nawigacją (poprzedni/następny).
+* Zaawansowane wyszukiwanie pozycji.
+* Dynamiczny ranking najwyżej ocenianych tytułów oraz system rekomendacji na podstawie ocen.
+* System rejestracji i logowania użytkowników.
+* **Panel Administratora:** zarządzanie bazą (dodawanie, usuwanie, edycja tytułu, opisu, okładki).
+* Importowanie nowych rozdziałów bezpośrednio z plików JSON.
 
-1. Tłumacz pobiera treść rozdziałów ze strony fanmtl.com używając headless Chromium (Puppeteer)
-2. Tekst jest dzielony na fragmenty i tłumaczony przez Google Translate API
-3. Przetłumaczone rozdziały są zapisywane jako plik JSON w folderze `exports/`
-4. Plik JSON jest kopiowany do folderu `mojprojekt/` w bibliotece
-5. Endpoint `import_json.php` importuje rozdziały do bazy MySQL
-6. Rozdziały są dostępne do czytania w aplikacji biblioteki
+### 🤖 Tłumacz
+* Web scraping treści z serwisu `fanmtl.com` przy użyciu Puppeteer.
+* Automatyczne dzielenie tekstu na paczki i translacja EN→PL via Google Translate.
+* Obsługa zakresów rozdziałów (np. rozdział 1-50).
+* *Retry mechanism* – automatyczne ponawianie prób przy błędach sieciowych.
+* Eksport gotowych struktur do zunifikowanych plików JSON.
+* Podgląd logów systemowych w czasie rzeczywistym.
 
-## Instalacja i uruchomienie
+---
 
-### Wymagania
-- Docker Desktop (https://www.docker.com/products/docker-desktop/)
-- Git
+## 🔄 Jak to działa?
 
-### 1. Sklonuj repozytorium
-git clone https://github.com/MateuszBiern/library-system.git
+1. Tłumacz pobiera treść rozdziałów ze strony `fanmtl.com` za pomocą ukrytej przeglądarki Chromium (Puppeteer).
+2. Tekst jest procesowany i tłumaczony przez Google Translate API.
+3. Przetłumaczone rozdziały trafiają do pliku JSON w katalogu `exports/`.
+4. Plik JSON jest kopiowany do katalogu `mojprojekt/` w aplikacji biblioteki.
+5. Endpoint `import_json.php` importuje rozdziały do bazy danych MySQL.
+6. Treść staje się natychmiast dostępna dla czytelników w aplikacji biblioteki.
 
-### 2. Uruchom bibliotekę
+---
+
+## 🚀 Instalacja i uruchomienie
+
+### Wymagania wstępne
+* Zainstalowany [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+* Zainstalowany [Git](https://git-scm.com/)
+
+### 1. Klonowanie repozytorium
+```bash
+git clone [https://github.com/MateuszBiern/library-system.git](https://github.com/MateuszBiern/library-system.git)
+```
+
+### 2. Uruchomienie Biblioteki
+```bash
 cd library-system/Library_app
+docker compose up --build -d
+```
+*Biblioteka będzie dostępna pod adresem:* **[http://localhost](http://localhost)**
 
-docker compose up --build
-Biblioteka dostępna pod: **http://localhost**
-
-### 3. Uruchom tłumacz (nowe okno terminala)
+### 3. Uruchomienie Tłumacza
+Otwórz **nowe okno terminala** i wykonaj:
+```bash
 cd library-system/Translate_app/Translate
+docker compose up --build -d
+```
+*Tłumacz będzie dostępny pod adresem:* **[http://localhost:5000](http://localhost:5000)**
 
-docker compose up --build
-Tłumacz dostępny pod: **http://localhost:5000**
+---
 
-## Jak dodać nową książkę?
+## ➕ Jak dodać nową książkę?
 
-1. Zaloguj się do biblioteki i dodaj książkę przez panel admina
-2. Zapamiętaj ID książki
-3. Wejdź na http://localhost:5000
-4. Podaj:
-   - **Book ID** - ID książki z biblioteki
-   - **Base URL** - link do książki np. `https://www.fanmtl.com/novel/ke423463_1.html`
-   - **From/To chapter** - zakres rozdziałów do pobrania
-5. Kliknij **Start** i poczekaj na zakończenie
-6. Skopiuj wygenerowany plik JSON z `exports/` do `Library_app/backend/bibliotekaPHP/mojprojekt/`
-7. Wejdź na `http://localhost/api/import_json` aby zaimportować rozdziały
+1. Zaloguj się do biblioteki jako administrator i dodaj książkę przez panel admina.
+2. **Zapamiętaj ID książki**.
+3. Wejdź na `http://localhost:5000` (Panel Tłumacza).
+4. Podaj dane w formularzu:
+   * **Book ID:** ID książki dodanej w bibliotece.
+   * **Base URL:** link do książki, np. `https://www.fanmtl.com/novel/ke423463_1.html`.
+   * **From/To chapter:** zakres rozdziałów do pobrania.
+5. Kliknij **Start** i poczekaj na zakończenie procesu.
+6. Skopiuj wygenerowany plik JSON z folderu `exports/` do lokalizacji `Library_app/backend/bibliotekaPHP/mojprojekt/`.
+7. Wejdź w przeglądarce na `http://localhost/api/import_json`, aby zaimportować rozdziały do bazy.
 
-## Screenshots
+---
 
-### Main page
-![main](docs/main.png)
+## 📸 Screenshots
 
-### Recommendations
-![recommendations](docs/recommendation.png)
+### Strona główna
+![main](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/main.png)
 
-### Last added books
-![last added](docs/last_added.png)
+### Rekomendacje i ostatnio dodane
+![recommendations](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/recommendation.png)
+![last added](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/last_added.png)
 
-### Search
-![search](docs/search.png)
+### Wyszukiwarka
+![search](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/search.png)
 
-### Book page
-![book page](docs/book_page.png)
+### Strona książki i czytnik
+![book page](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/book_page.png)
+![book chapter](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/book_chapter.png)
+![book pagination](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/book_pagination.png)
 
-### Book chapter reader
-![book chapter](docs/book_chapter.png)
+### Panel logowania
+![login](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/login.png)
 
-### Chapter Pagination
-![book pagination](docs/pagination.png)
+### Panel Admina (Dodawanie i edycja)
+![add book](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/add_book.png)
+![edit books](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/edit_books.png)
+![edit book details](https://raw.githubusercontent.com/MateuszBiern/library-system/main/docs/edit_book_details.png)
 
-### Book pagination
-![book pagination](docs/book_pagination.png)
+---
 
-### Login
-![login](docs/login.png)
-
-### Add book (admin)
-![add book](docs/add_book.png)
-
-### Edit books (admin panel)
-![edit books](docs/edit_books.png)
-
-### Edit book details
-![edit book details](docs/edit_book_details.png)
-
-- Pierwsze uruchomienie może potrwać kilka minut (pobieranie obrazów Docker + budowanie frontendu)
-- Baza danych jest automatycznie inicjalizowana przy pierwszym uruchomieniu
-- Tłumaczenie dużej liczby rozdziałów może potrwać długo ze względu na limity Google Translate
-
+## 💡 Ważne uwagi
+* Pierwsze uruchomienie może potrwać kilka minut (pobieranie obrazów Docker + budowanie frontendu).
+* Baza danych jest automatycznie inicjalizowana przy pierwszym uruchomieniu.
+* Tłumaczenie dużej liczby rozdziałów na raz może potrwać długo ze względu na limity API Google Translate.
