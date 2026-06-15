@@ -134,8 +134,7 @@ Tłumacz dostępny pod: **http://localhost:5000**
 ## Screenshots
 
 ### Main page
-![main](<img width="1848" height="924" alt="523343044-58bcedd0-e7bd-43f1-bd85-e92e0b384418" src="https://github.com/user-attachments/assets/fffde7e1-3f14-4163-9919-1f7c1b73fbfb" />
-.png)
+![main](docs/main.png)
 
 ### Recommendations
 ![recommendations](docs/recommendation.png)
