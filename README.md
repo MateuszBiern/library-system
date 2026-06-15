@@ -131,7 +131,62 @@ Tłumacz dostępny pod: **http://localhost:5000**
 6. Skopiuj wygenerowany plik JSON z `exports/` do `Library_app/backend/bibliotekaPHP/mojprojekt/`
 7. Wejdź na `http://localhost/api/import_json` aby zaimportować rozdziały
 
+## Screenshots
+
+### Main page
+![main](<img width="1848" height="924" alt="523343044-58bcedd0-e7bd-43f1-bd85-e92e0b384418" src="https://github.com/user-attachments/assets/fffde7e1-3f14-4163-9919-1f7c1b73fbfb" />
+.png)
+
+### Recommendations
+![recommendations](docs/recommendation.png)
+
+### Last added books
+![last added](docs/last_added.png)
+
+### Search
+![search](docs/search.png)
+
+---
+
+### Book page
+![book page](docs/book_page.png)
+
+### Book chapter reader
+![book chapter](docs/book_chapter.png)
+
+### Book pagination
+![book pagination](docs/book_pagination.png)
+
+---
+
+### Login
+![login](docs/login.png)
+
+---
+
+### Add book (admin)
+![add book](docs/add_book.png)
+
+### Edit books (admin panel)
+![edit books](docs/edit_books.png)
+
+### Edit book details
+![edit book details](docs/edit_book_details.png)
+
+---
+
+### Translator (Web panel)
+![translator web](docs/translator_web.png)
+
+### Translator (Terminal / CLI)
+![translator terminal](docs/translator_terminal.png)
+
+---
+
+### Mobile view
+![mobile](docs/mobile.png)
 ## Uwagi
 - Pierwsze uruchomienie może potrwać kilka minut (pobieranie obrazów Docker + budowanie frontendu)
 - Baza danych jest automatycznie inicjalizowana przy pierwszym uruchomieniu
 - Tłumaczenie dużej liczby rozdziałów może potrwać długo ze względu na limity Google Translate
+
